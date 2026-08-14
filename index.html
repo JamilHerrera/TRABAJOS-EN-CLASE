@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agenda Médica | Citas</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container header-content">
+            <h1 class="logo">🩺 Agenda Médica</h1>
+            <p class="tagline">Agenda tus citas médicas de forma rápida y sencilla</p>
+        </div>
+    </header>
+
+    <main class="container">
+        <!-- Formulario de agendamiento -->
+        <section class="card form-card">
+            <h2 class="card-title">📅 Agendar Nueva Cita</h2>
+            <form id="citaForm" novalidate>
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="nombre">Nombre completo *</label>
+                        <input type="text" id="nombre" placeholder="Ej: Juan Pérez" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="telefono">Teléfono *</label>
+                        <input type="tel" id="telefono" placeholder="Ej: 9999-0000" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="correo">Correo electrónico</label>
+                        <input type="email" id="correo" placeholder="Ej: juan@correo.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="especialidad">Especialidad *</label>
+                        <select id="especialidad" required>
+                            <option value="">-- Selecciona una especialidad --</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="medico">Médico *</label>
+                        <select id="medico" required disabled>
+                            <option value="">-- Primero elige especialidad --</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fecha">Fecha *</label>
+                        <input type="date" id="fecha" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="hora">Hora *</label>
+                        <select id="hora" required>
+                            <option value="">-- Selecciona una hora --</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-primary">Agendar Cita</button>
+                    <button type="reset" class="btn btn-secondary">Limpiar</button>
+                </div>
+            </form>
+            <div id="mensaje" class="mensaje" role="alert"></div>
+        </section>
+
+        <!-- Listado de citas -->
+        <section class="card list-card">
+            <h2 class="card-title">📋 Mis Citas Agendadas</h2>
+            <div id="citasContainer">
+                <p class="empty-state">Aún no tienes citas agendadas.</p>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2026 Agenda Médica. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
