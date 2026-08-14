@@ -28,9 +28,15 @@ export function guardarCitas(citas, storage = localStorage) {
 }
 
 // ===== Validación de paciente (RF-01) =====
+const REGEX_CORREO = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+function esCorreoValido(correo) {
+    return REGEX_CORREO.test(correo);
+}
+
 export function validarPaciente({ nombre, telefono, correo }) {
     if (!nombre || !nombre.trim()) return 'Por favor ingresa tu nombre completo.';
     if (!telefono || !telefono.trim()) return 'Por favor ingresa tu número de teléfono.';
-    if (correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) return 'El correo electrónico no es válido.';
+    if (correo && !esCorreoValido(correo)) return 'El correo electrónico no es válido.';
     return null;
 }
