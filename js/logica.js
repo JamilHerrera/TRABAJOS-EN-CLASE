@@ -28,4 +28,9 @@ export function guardarCitas(citas, storage = localStorage) {
 }
 
 // ===== Validación de paciente (RF-01) =====
-// TODO: Implementar en fase GREEN
+export function validarPaciente({ nombre, telefono, correo }) {
+    if (!nombre || !nombre.trim()) return 'Por favor ingresa tu nombre completo.';
+    if (!telefono || !telefono.trim()) return 'Por favor ingresa tu número de teléfono.';
+    if (correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) return 'El correo electrónico no es válido.';
+    return null;
+}
