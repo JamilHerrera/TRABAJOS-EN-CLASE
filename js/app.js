@@ -1,17 +1,11 @@
-// ===== Datos de especialidades y médicos =====
-const especialidades = [
-    { id: 'general', nombre: 'Medicina General', medicos: ['Dr. Carlos Ramírez', 'Dra. Ana Torres'] },
-    { id: 'cardiologia', nombre: 'Cardiología', medicos: ['Dr. Luis Mendoza', 'Dra. María López'] },
-    { id: 'pediatria', nombre: 'Pediatría', medicos: ['Dra. Sofía Herrera', 'Dr. Jorge Castillo'] },
-    { id: 'dermatologia', nombre: 'Dermatología', medicos: ['Dra. Elena Vargas', 'Dr. Pedro Salas'] },
-    { id: 'ginecologia', nombre: 'Ginecología', medicos: ['Dra. Rosa Jiménez', 'Dr. Andrés Molina'] }
-];
-
-// Horario de atención: 8:00 a 17:00 (cada hora)
-const horasDisponibles = [
-    '08:00', '09:00', '10:00', '11:00', '12:00',
-    '13:00', '14:00', '15:00', '16:00', '17:00'
-];
+// ===== Importar lógica de negocio =====
+import {
+    especialidades,
+    horasDisponibles,
+    obtenerCitas,
+    guardarCitas,
+    validarPaciente
+} from './logica.js';
 
 // ===== Referencias al DOM =====
 const form = document.getElementById('citaForm');
@@ -21,18 +15,6 @@ const selectHora = document.getElementById('hora');
 const inputFecha = document.getElementById('fecha');
 const mensajeDiv = document.getElementById('mensaje');
 const citasContainer = document.getElementById('citasContainer');
-
-// ===== Almacenamiento (LocalStorage) =====
-const STORAGE_KEY = 'citasMedicas';
-
-function obtenerCitas() {
-    const data = localStorage.getItem(STORAGE_KEY);
-    return data ? JSON.parse(data) : [];
-}
-
-function guardarCitas(citas) {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(citas));
-}
 
 // ===== Inicialización =====
 function init() {
@@ -105,9 +87,8 @@ function validarFormulario() {
     const fecha = inputFecha.value;
     const hora = selectHora.value;
 
-    if (!nombre) return 'Por favor ingresa tu nombre completo.';
-    if (!telefono) return 'Por favor ingresa tu número de teléfono.';
-    if (correo && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(correo)) return 'El correo electrónico no es válido.';
+    const errorPaciente = validarPaciente({ nombre, telefono, correo });
+    if (errorPaciente) return errorPaciente;
     if (!espId) return 'Por favor selecciona una especialidad.';
     if (!medico) return 'Por favor selecciona un médico.';
     if (!fecha) return 'Por favor selecciona una fecha.';

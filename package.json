@@ -1,0 +1,13 @@
+{
+  "name": "citas-medicas",
+  "version": "1.0.0",
+  "description": "Aplicación web de agendamiento de citas médicas",
+  "type": "module",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest"
+  },
+  "devDependencies": {
+    "vitest": "^2.1.9"
+  }
+}
